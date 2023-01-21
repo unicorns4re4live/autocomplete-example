@@ -1,72 +1,70 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import './autocomplete.scss';
-import Options from './components/options';
-import { AutocompleteConfigs, AutocompleteProps, Option } from './types';
-import ErrorMessage from '../error/error';
+import React, { useCallback, useEffect, useState } from 'react'
+import './autocomplete.scss'
+import Options from './components/options'
+import { AutocompleteConfigs, AutocompleteProps, Option } from './types'
+import ErrorMessage from '../error/error'
 
-function Autocomplete({ delay, placeholder }: AutocompleteProps) {
+function Autocomplete ({ delay, placeholder }: AutocompleteProps): JSX.Element {
   const [configs, setConfigs] = useState<AutocompleteConfigs>({
     delay: delay ?? 300,
     placeholder: placeholder ?? 'Some value',
     options: [],
     isDataLoading: false,
     isFocused: false,
-    error: '',
+    error: ''
   })
-  const [inputValue, setInputValue] = useState<string>('');
-
-
+  const [inputValue, setInputValue] = useState<string>('')
 
   useEffect(() => {
-    setConfigs({...configs, error: ''});
+    setConfigs({ ...configs, error: '' })
 
-    if(!!inputValue.length) {
-      const debouncedCall = setTimeout(handleChange, configs.delay);
+    if (inputValue.length > 0) {
+      const debouncedCall = setTimeout(handleChange, configs.delay)
 
       return () => {
-        clearTimeout(debouncedCall);
+        clearTimeout(debouncedCall)
       }
     }
-  }, [inputValue]);
+  }, [inputValue])
 
   const shouldOptionsBeDisplayed = useCallback(() => {
-    return !!inputValue.length && configs.isFocused && !!configs.options.length;
-  }, [configs.isFocused, configs.options, inputValue]);
+    return inputValue.length > 0 && configs.isFocused && !(configs.options.length === 0)
+  }, [configs.isFocused, configs.options, inputValue])
 
-  const handleSelection = (value: string) => {
-    setInputValue(value);
-    setConfigs({ ...configs, isFocused: false });
+  const handleSelection = (value: string): void => {
+    setInputValue(value)
+    setConfigs({ ...configs, isFocused: false })
   }
 
-  const handleChange = async () => {
+  const handleChange = async (): Promise<void> => {
     try {
-      setConfigs({ ...configs, isDataLoading: true });
+      setConfigs({ ...configs, isDataLoading: true })
 
-      const optionsResp = await fetch(`${window.location.origin}/data.json?input=${inputValue}`);
-      const options = await optionsResp.json();
+      const optionsResp = await fetch(`${window.location.origin}/data.json?input=${inputValue}`)
+      const options = await optionsResp.json()
       const filteredOptions = options
-          .filter((option: Option) => option.value.toLowerCase().includes(inputValue.toLowerCase()));
+        .filter((option: Option) => option.value.toLowerCase().includes(inputValue.toLowerCase()))
 
-      setConfigs({ ...configs, isDataLoading: false, options: filteredOptions });
+      setConfigs({ ...configs, isDataLoading: false, options: filteredOptions })
     } catch (e) {
-      console.error(e);
-      setConfigs({ ...configs, options: [],isDataLoading: false, error: 'Request error' });
+      console.error(e)
+      setConfigs({ ...configs, options: [], isDataLoading: false, error: 'Request error' })
     }
-  };
+  }
 
   return (
       <div className='autocomplete'>
-        <input  type='text'
+        <input type='text'
                 placeholder={configs.placeholder}
                 value={inputValue}
                 autoFocus={false}
                 onBlur={() => {
                   setTimeout(() => {
-                    setConfigs({...configs, isFocused: false})
-                  }, 90)  //Without set timeout it breaks onClick in child comp
+                    setConfigs({ ...configs, isFocused: false })
+                  }, 90) // Without set timeout it breaks onClick in child comp
                 }}
-                onFocus={() => setConfigs({...configs, isFocused: true})}
-                onChange={(e) => setInputValue(e.target.value)}
+                onFocus={() => { setConfigs({ ...configs, isFocused: true }) }}
+                onChange={(e) => { setInputValue(e.target.value) }}
         />
 
         <ErrorMessage error={configs.error} />
@@ -78,7 +76,7 @@ function Autocomplete({ delay, placeholder }: AutocompleteProps) {
                  handleSelection={ handleSelection }
         />
       </div>
-  );
+  )
 }
 
-export default Autocomplete;
+export default Autocomplete

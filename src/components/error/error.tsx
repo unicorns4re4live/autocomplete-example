@@ -1,9 +1,9 @@
-import React from 'react';
-import './error.scss';
-import { ErrorMessageProps } from './types';
+import React from 'react'
+import './error.scss'
+import { ErrorMessageProps } from './types'
 
-function ErrorMessage({ error }: ErrorMessageProps) {
-   return error ? <p className='error'>{ error }</p> : null;
+function ErrorMessage ({ error }: ErrorMessageProps): JSX.Element | null {
+  return error.length > 0 ? <p className='error'>{ error }</p> : null
 }
 
-export default ErrorMessage;
+export default ErrorMessage
