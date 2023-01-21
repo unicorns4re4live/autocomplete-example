@@ -2,6 +2,12 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Check scenarios
+1) Common scenario - just start typing from "r" and you'll see autocomplete
+2) Check loading indication - network throttling should be set in dev console
+3) Error check - you should block domain and then start type something
+
+
 ## Available Scripts
 
 In the project directory, you can run:
