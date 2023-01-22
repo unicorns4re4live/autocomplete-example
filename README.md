@@ -2,6 +2,9 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Deployed version
+https://unicorns4re4live.github.io/
+
 ## Check scenarios
 1) Common scenario - just start typing from "r" and you'll see autocomplete
 2) Check loading indication - network throttling should be set in dev console
