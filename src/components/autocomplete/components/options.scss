@@ -3,6 +3,8 @@
   border: 1px solid black;
   border-top: none;
   width: calc(100% - 2px);
+  background: #fff;
+  z-index: 1000;
 }
 
 .loading {
@@ -25,7 +27,13 @@
     }
 
     &.selected {
-      background: rgba(25,118, 210, 0.2);
+      background-color: rgba(25,118, 210, 0.2);
+    }
+
+    &:not(.selected) {
+      .highlight {
+        background-color: rgba(25,118, 210, 0.4);
+      }
     }
   }
 }

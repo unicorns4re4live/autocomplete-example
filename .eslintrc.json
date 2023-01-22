@@ -19,6 +19,7 @@
     ],
     "rules": {
         "react/no-unescaped-entities": "off",
-        " @typescript-eslint/no-misused-promises": "off"
+        "@typescript-eslint/no-misused-promises": "off",
+        "react/jsx-curly-spacing": [2, "always"]
     }
 }
