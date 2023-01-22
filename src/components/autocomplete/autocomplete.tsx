@@ -7,11 +7,13 @@ import ErrorMessage from '../error'
 function Autocomplete ({
   apiData,
   delay = 300,
+  displayedOptionsLimit = 3,
   placeholder = 'Some value'
 }: AutocompleteProps): JSX.Element {
   const [configs, setConfigs] = useState<AutocompleteConfigs>({
     delay,
     placeholder,
+    displayedOptionsLimit,
     apiData,
     options: [],
     isDataLoading: false,
@@ -121,6 +123,7 @@ function Autocomplete ({
 
             <Options options={ configs.options }
                      currentValue={ inputValue }
+                     displayedOptionsLimit={ displayedOptionsLimit }
                      isLoading={ configs.isDataLoading }
                      isDisplayed={ shouldOptionsBeDisplayed }
                      handleSelection={ handleSelection }

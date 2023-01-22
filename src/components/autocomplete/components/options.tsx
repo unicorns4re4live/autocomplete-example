@@ -6,6 +6,7 @@ function Options ({
   options,
   isDisplayed,
   isLoading,
+  displayedOptionsLimit,
   currentValue,
   handleSelection
 }: OptionsProps): JSX.Element | null {
@@ -36,7 +37,7 @@ function Options ({
   }
 
   return (
-        <ul className='options'>{
+        <ul className='options' style={ { height: `${displayedOptionsLimit * 3}em` } }>{
             options.map((option) => (
                 <li className={ currentValue === option.value ? 'selected' : undefined }
                     key={ option.id }

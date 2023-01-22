@@ -9,10 +9,12 @@ function App (): JSX.Element {
             <h2>Local Data autocomplete</h2>
             <Autocomplete/>
             <h2>From Api</h2>
-            <Autocomplete placeholder={ 'Samsung' } apiData={ {
-              url: 'https://dummyjson.com/products/search?q=',
-              valueKeysNesting: ['products', 'title']
-            } }/>
+            <Autocomplete placeholder={ 'Samsung' }
+                          apiData={ {
+                            url: 'https://dummyjson.com/products/search?q=',
+                            valueKeysNesting: ['products', 'title']
+                          } }
+                          displayedOptionsLimit={ 6 }/>
         </main>
   )
 }

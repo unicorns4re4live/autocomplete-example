@@ -7,6 +7,7 @@ export interface Option {
 export interface AutocompleteProps {
   delay?: number
   placeholder?: string
+  displayedOptionsLimit?: number
   apiData?: ApiData
 }
 
@@ -23,6 +24,7 @@ export interface OptionsProps {
   isDisplayed: boolean
   isLoading: boolean
   currentValue: string
+  displayedOptionsLimit: number
   handleSelection: (value: string) => void
 }
 
